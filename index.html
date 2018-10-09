@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://use.fontawesome.com/68d79165dc.js"></script>
+        <meta charset="utf-8">
+        <style>
+            body {
+                padding: 0% 10% 0% 10%;
+            }
+        </style>
+        <title>How-To Guide</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
+      rel="stylesheet">       
+    </head>
+    <body>
+        <h1 style="text-align:center"><i class="fa fa-space-shuttle" aria-hidden="true"></i> A How-To Guide on using NASA APIs <i class="fa fa-space-shuttle" aria-hidden="true"></i></h1>
+        
+        <section style="background-color:#eff7f7">
+            <h2>What are APIs?</h2>
+            <p>You probably have heard about various APIs such as Google Maps, Facebook, Twitter, Instagram and Pinterest. However, I assume if your reading this you only have a vague idea about what APIs are used for and likely little knowledge on how to use them. This guide will help get you started in using APIs by explaining the NASA APIs. Then you can go use your newfound knowledge on other APIs to search photos with the Instagram API or incorporate a Google Map into you website detailing directions to you business.</p>
+            
+            <p>So what is an API? API stands for Application Programming Interface. They provide developers with the tools to access data from external sources and incorporate that data into their own programs or websites for added functionality. APIs provide a secure and agreed upon way to access this data and once you understand the process, it becomes easier to use other APIs. But the hardest part for a beginner is getting that first API to work and learning the overall code structure to access and use that data. So let's get started by learning about NASA APIs.</p>
+            <p><i class="fa fa-asterisk" aria-hidden="true"></i> For more information on APIs, visit <a href="https://en.wikipedia.org/wiki/Application_programming_interface" target="_blank">Wikipedia <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+        </section>
+        
+        <section>
+            <h2>The NASA APIs</h2>
+                <p>Most people know about the National Aeronautics and Space Administration, aka NASA. But did you know they allow people to access and use their vast amounts of data? The goal of their APIs is to allow developers to access and implement their data and imagery in creative and practical ways. These APIs include the Astronomy Picture of the Day (APOD), Mars Rover Photos, Earth, Patents, Asteroids and Earth Polychromatic Imaging Camera (EPIC). This guide will look at APOD and Earth but make sure to check out the others.</p>
+                <p>Also check out other NASA projects:</p>
+                <p><i class="fa fa-asterisk" aria-hidden="true"></i> Check out NASA on <a href="https://github.com/nasa" target="_blank">Github <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+                <p><i class="fa fa-asterisk" aria-hidden="true"></i> View their open source projects <a href="https://code.nasa.gov/#/" target="_blank">here <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+            <p><i class="fa fa-asterisk" aria-hidden="true"></i> Browse publicly available <a href="https://data.nasa.gov/" target="_blank">NASA datasets and visualizations <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+        </section>
+        
+        <section style="background-color:#eff7f7">
+            <h2>Getting Your Key <i class="fa fa-key" aria-hidden="true"></i></h2>
+            <p>
+                Many of the APIs you might come across will require an API key. Without one you will not be able to access and use the intended API. Keys, sometimes called clientid, both allow you to use the API and the owner of the API to keep track of how many requests you are making. This keeps the API from becoming overloaded with requests that can lead to a slow down for everyone using the API. 
+            </p>
+            <p><i class="fa fa-asterisk" aria-hidden="true"></i> To get your free NASA API key <a href="https://api.nasa.gov/index.html#apply-for-an-api-key" target="_blank">click here <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+            <p>The request rate for your NASA API key is 1000 requests per hour. If you'd prefer not to sign-up, you can use the <code>DEMO_KEY</code> that has a rate of 50 requests per day.</p>
+        </section>
+        
+        <section>
+            <h2><i class="fa fa-code" aria-hidden="true"></i> Explaining JSON <i class="fa fa-code" aria-hidden="true"></i></h2>
+                <p>Have you heard of JSON before? Pronounced "Jason", JSON stands for Javascript Object Notation and it is one of the most popular methods for returning data from APIs. This format helps to standardize data transmission to be easily usable for both people and computers. It is based off the Javascript language and is a data-format that is language independent. Thus it has worked its way into many popular programming languages today.</p>
+            
+                <ul>JSON contains 6 basic datatypes which include:
+                    <li>Strings</li>
+                    <li>Numbers</li>
+                    <li>Boolean</li>
+                    <li>Objects</li>
+                    <li>Arrays</li>
+                    <li>null</li>
+                </ul>
+
+                <p>So, your probably wondering what JSON data looks like. Let's look at an example of some possible data for a weather API.</p>
+            
+                <h4>Code Example:</h4>
+                <code>
+                {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"city": "Seattle",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"state": "WA",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"temperature": 65,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"conditions": {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"wind": "SW",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"speed": 8,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rain": "light",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"clouds": true<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }<br><br>
+                </code>
+                
+                <p>So what's going on here? As in the name JSON, the data returned is in the form of a Javascript object. When returning data from APIs we usually store this object in a variable say <code>response</code>. So we can access this data using dot notation. If you wanted to use the temperature, you would access it via <code>response.temperature</code> or the rain via <code>response.conditions.rain</code>. This is a pretty basic example but it helps to get the point across that this is essentially what JSON is about. How do we go about getting this data in the first place? Lets look at that in relation to the NASA APIs because frankly that's the purpose of this guide, not some imaginary weather API.</p>
+        </section>
+        
+        <section style="background-color:#eff7f7">
+            <h2>APOD</h2>
+            <p>Let's start by seeing what we could do with the APOD API.</p>
+            <p><i class="fa fa-hand-o-down" aria-hidden="true"></i>
+Click the button below.</p>
+            <button type="button" id="GetAPOD" class="btn btn-info">See Todays Content</button><br>
+            <img src="blank.gif" id="url"/><br>
+            <div id="content"></div>
+            <p><b>Title: </b><span id="title"></span></p>
+            <p><b>Date: </b><span id="date"></span></p>
+            <p><b>Explanation: </b><span id="info"></span></p>
+            <p><b>Copyright: </b><span id="copyright"></span><br>(Is left blank if public domain)</p>
+            
+            <p>Using the APOD API, we not only were able to fill in the blank information for title, date, and explanation, but we get to see a really cool picture of space. All of this comes from the same JSON format as the simple weather example above. Here is some example JSON data returned from APOD. (Note that I shortened the explanation for brevity)</p>
+            
+            <h4>JSON Data Example:</h4>
+            <code>{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"date": "2016-11-17",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"explanation": "Faster than a speeding bullet, more powerful than a locomotive...<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"hdurl": "http://apod.nasa.gov/apod/image/1611/nhq201611140001.jpg",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"media_type": "image",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"service_version": "v1",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"title": "Soyuz vs Supermoon",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"url": "http://apod.nasa.gov/apod/image/1611/nhq201611140001_900x1238.jpg"<br>
+                }<br><br></code>
+            
+            <p> You know about the data the API returns but now let's look at how to get that data.</p>
+            
+            <h4>Code Example:</h4>
+            <code>
+            document.getElementById('GetAPOD').addEventListener('click', function(event){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;var req = new XMLHttpRequest();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;req.open("GET", "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", true);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;req.addEventListener('load', function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var response = JSON.parse(req.responseText);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('title').textContent = response.title;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('url').src = response.hdurl;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('copyright').textContent = response.copyright;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('info').textContent = response.explanation;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('date').textContent = response.date;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;})<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;req.send(null);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;event.preventDefault();<br>
+            })<br>
+            </code><br>
+            
+            <p>This looks fairly complex doesn't it. <b>Don't be intimidated.</b> Let's walk through it together.</p><br>
+            
+            <code>document.getElementById('GetAPOD').addEventListener('click', function(event){})</code>
+            <p>The first and last line of code simply applies a function to the See Todays Picture button to execute when you click on it. The executed code is everything in between the first and last <code>{}</code>.</p><br>
+            
+            <code>var req = new XMLHttpRequest();</code>
+            <p>This line creates an object in the <code>req</code> variable that can make our HTTP requests as well as capture the data returned from the API. It is pretty much essential when making calls to APIs.</p><br>
+            
+            <code>req.open("GET", "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", true);</code>
+            <p>Here is where we tell our request object to send and/or receive data from. The <code>req.open</code> opens a <code>GET</code> request to <code>"https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"</code>. This is the address of the APOD API. All NASA APIs begin with <code>https://api.nasa.gov</code>. So if you use a different NASA API, you will use a different query paramater. The parameter in this case is <code>/planetary/apod</code>. We will only be using a <code>GET</code> request as we have no data to send the API. The <code>true</code> means we are going to use an asynchrounous request. This means we can do other things on the page if the API is slow to respond or has issues.<br><i class="fa fa-asterisk" aria-hidden="true"></i> If you signed up for your own key earlier, simply replace <code>DEMO_KEY</code> with the key you received.</p><br>
+            
+            <code>req.addEventListener('load', function(){</code>
+            <p>This is the asynchronous part. It creates a closure and waits for the response from the API before executing its code.<br><i class="fa fa-asterisk" aria-hidden="true"></i> Read more about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">closures <i class="fa fa-external-link" aria-hidden="true"></i></a> and <a href="http://rowanmanning.com/posts/javascript-for-beginners-async/" target="_blank">asynchronous <i class="fa fa-external-link" aria-hidden="true"></i></a> functions.</p><br>
+            
+            <code>var response = JSON.parse(req.responseText);</code>
+            <p>When the API sends back data through <code>req.responseText</code>, it's not quite in the form as the weather example. Instead it comes back as a string and we need to use <code>JSON.parse</code> to turn it into the JSON object we can use. We then store that in a new variable <code>response</code> for ease of use.</p><br>
+            
+            <code>
+            document.getElementById('title').textContent = response.title;<br>
+            document.getElementById('url').src = response.hdurl;<br>
+            document.getElementById('copyright').textContent = response.copyright;<br>
+            document.getElementById('info').textContent = response.explanation;<br>
+            document.getElementById('date').textContent = response.date;
+            </code><br>
+            
+            <p>These lines simply take the returned information stored in the <code>response</code> variable and inserts it into the page. You saw the results when you clicked the See Todays Picture button above.</p><br>
+            
+            <code>req.send(null);<br>
+            event.preventDefault();</code>
+            <p>These final two lines are important. The <code>req.send(null)</code> is what actually sends our request to the API. It might seem a little weird to send our request at the end of the function, but that's how it works. The <code>null</code> specifies that we are not sending any data to the API. The <code>event.preventDefault()</code> allows us to update information on our website and actually view it. Otherwise the page would just refresh itself as soon as the information is displayed and we wouldn't see the APOD image.</p>
+            
+            <p>That is pretty much it for the APOD API. There is an additional query parameter to specify a specific days image. An example for April 15, 2015 would be <code>https://api.nasa.gov/planetary/apod?date=2015-04-15&api_key=DEMO_KEY</code>. In comparison to other APIs out there, this one is pretty simple and beginner friendly. Use your newfound powers wisely!</p>
+            
+        </section>
+        
+        <section>
+            <h2>Earth</h2>
+            <p>Now that you know how the APOD API works, let's look at the Earth API. This API is very similar to APOD but it has additional query parameters for you to use. The Earth API returns pan-sharpened Landsat 8 imagery that is powered by the Google Earth Engine. NASA imagines using this data to monitor deforestation or natural disasters. </p>
+            <p>As in the APOD API, the Earth HTTP request starts with <code>https://api.nasa.gov</code> to access NASA APIs and then we add <code>/planetary/earth/imagery</code> to get to the Earth API. Now we need some query parameters to access the images.</p>
+            <ul>
+                <li>lat</li>
+                <li>lon</li>
+                <li>dim</li>
+                <li>date</li>
+                <li>cloud_score</li>
+                <li>api_key</li>
+            </ul>
+            <p><i class="fa fa-asterisk" aria-hidden="true"></i> For specific details on the parameters, visit the <a href="https://api.nasa.gov/api.html#earth" target="_blank">Earth API documentation <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+            <p>Here is an example url: <br><code>https://api.nasa.gov/planetary/earth/imagery?lon=-122.33&lat=47.60&date=2014-02-01&cloud_score=True&api_key=DEMO_KEY</code></p>
+            <p>This request accesses the Earth API and returns an image from February 1, 2014 for the specified latitude and longitude. It also returns a cloud score which is the percentage of the image covered in clouds. This way if you are requesting a high number of images you can filter out those that are mostly clouds. We want to see Earth not clouds right?</p>
+            
+            <button type="button" id="Earth" class="btn btn-info">See Image of Seattle</button><br>
+            <img style="width:300; height:300" src="" id="earthUrl"/><br>
+            <p><b>Cloud Score:</b> <span id="cloud"></span></p>
+            <p>The Earth API has far more possible uses in my opinion compared to the APOD API. The overall request for the image is the same as the APOD code example. Just change the url, element ids, and the  parts of the response you are accessing through dot notation. Below is the JSON data for the above image.</p>
+            
+            <h4>JSON Data</h4>
+            
+            <code>{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"cloud_score": 0.104327748884599,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"date": "2014-02-03T19:02:51",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"id": "LC8_L1T_TOA/LC80470272014034LGN00",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"url": "https://earthengine.googleapis.com/api/thumb?thumbid=973c2f4677856908de886487f330b434<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&token=4649568f1d29017870814a04130d6dbf"<br>
+                }
+            </code>
+        </section>
+        
+        <section style="background-color:#eff7f7">
+            <h2>Final Thoughts</h2>
+            <p>I hope that you found this guide helpful in learning about the APOD and Earth APIs developed by NASA. With your newfound knowledge you should be able to go on and learn the other APIs NASA has to offer as well as use other really cool APIs out there. If you don't know where to start check out <a href="https://developers.google.com/apis-explorer/#p/" target="_blank">Google APIs <i class="fa fa-external-link" aria-hidden="true"></i></a>, <a href="https://watson-api-explorer.mybluemix.net/" target="_blank">IBM's Watson <i class="fa fa-external-link" aria-hidden="true"></i></a>, and <a href="https://www.instagram.com/developer/" target="_blank">Instagram <i class="fa fa-external-link" aria-hidden="true"></i></a>. Best of luck! </p>
+        </section><br><br>
+        <footer style="text-align:center">Made by Tanner Quesenberry <i class="fa fa-copyright" aria-hidden="true"></i>
+ 2016</footer><br>
+        <script src="nasa.js"></script>
+    </body>
+</html>
